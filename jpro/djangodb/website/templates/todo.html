@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <title>To-do List</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root{
+    --dark: #374151;
+    --darker: #1f2937;
+    --darkest: #111827;
+    --gray: #6b7280;
+    --light: #eee;
+    --pink: #ec4899;
+    --purple: #8b5cf6;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--darker);
+    color: #fff;
+}
+
+header{
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header h1{
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    font-weight: 300;
+    color: var(--pink);
+    margin-bottom: 1rem;
+}
+
+#new-task-form{
+    display: flex;
+}
+
+input, button{
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+#new-task-input{
+    flex: 1 1 0%;
+    background-color: var(--darkest);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    color: var(--light);
+    font-size: 0.75rem;
+}
+
+#new-task-input::placeholder{
+    color: var(--gray);
+}
+
+#new-task-submit{
+    color: var(--pink);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+#new-task-submit:hover{
+    opacity: 0.8s;
+}
+
+#new-task-submit:active{
+    opacity: 0.6s;
+}
+
+main{
+    flex: 1 1 0%;
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.task-list{
+    padding: 1rem;
+}
+
+.task-list h2{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;color: var(--pink);
+    margin-bottom: 1rem;
+}
+
+#tasks .task{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--darkest);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+#tasks .task .content{
+    flex: 1 1 0%;
+}
+
+#tasks .task .content .text{
+    color: #fff;
+    font-size: 0.85rem;
+    width: 100%;
+    display: block;
+    transition: 0.4s;
+}
+
+#tasks .task .content .text:not(:read-only){
+    color: var(--pink);
+}
+
+#tasks .task .actions{
+    display: flex;
+    margin: 0 -0.5rem;
+}
+
+.task .actions button{
+    cursor: pointer;
+    margin: 0 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.4s;
+    color: var(--pink);
+}
+
+.task .actions button:hover{
+    opacity: 0.8;
+}
+
+.task .actions button:active{
+    opacity: 0.6;
+}
+
+.task .actions .edit{
+    color: var(--pink);
+}
+
+.task .actions .delete{
+    color: crimson
+}
+    </style>
+</head>
+<body>
+    {% include 'sidebar.html'%}
+    <header>
+        <h1>Task Manager</h1>
+        <form method="POST" action="todo" id="new-task-form">
+            {%csrf_token%}
+            <input type="text"  name="task" placeholder="What do you have planned?" id="new-task-input">
+            <input type="submit" value="Add Task" id="new-task-submit">
+        </form>
+    </header>
+
+    <main>
+        <section class="task-list">
+            <h2>Tasks</h2>
+            <div id="tasks">
+                <div class="task">
+                    <div class="content">
+                        <input type="text" class="text" value="Default task for knowing" readonly>
+                    </div>
+                    <div class="actions">
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- <script>
+        window.localStorage
+        window.addEventListener('load', ()=>{
+    const form = document.querySelector("#new-task-form");
+    const input = document.querySelector("#new-task-input");
+    const list_el = document.querySelector("#tasks");
+
+    form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+
+        const task = input.value; 
+        if(!task){
+            alert("Please fill out the task");
+            return;
+        }
+        // else{
+        //     console.log("Success");
+        // }
+
+        const task_el = document.createElement("div");
+        task_el.classList.add("task");
+
+        const task_content_el = document.createElement("div");
+        task_content_el.classList.add("content");
+        // task_content_el.innerText = task;
+
+        task_el.appendChild(task_content_el);
+
+        const task_input_el = document.createElement("input");
+        task_input_el.classList.add("text");
+        task_input_el.type = "text";
+        task_input_el.value = task;
+        task_input_el.setAttribute("readonly", "readonly");
+
+        task_content_el.appendChild(task_input_el);
+
+        const task_actions_el = document.createElement("div");
+        task_actions_el.classList.add("actions");
+
+        const task_edit_el = document.createElement("button");
+        task_edit_el.classList.add("edit");
+        task_edit_el.innerHTML = "Edit";
+
+        const task_delete_el = document.createElement("button");
+        task_delete_el.classList.add("delete");
+        task_delete_el.innerHTML = "Delete";
+        
+        task_actions_el.appendChild(task_edit_el);
+        task_actions_el.appendChild(task_delete_el);
+
+        task_el.appendChild(task_actions_el);
+
+        list_el.appendChild(task_el);
+
+        input.value = "";
+
+        task_edit_el.addEventListener('click', ()=>{
+            if(task_edit_el.innerText.toLowerCase() == "edit"){
+                task_input_el.removeAttribute("readonly");
+                task_input_el.focus();
+                task_edit_el.innerText = "Save";
+            }
+            else{
+                task_input_el.setAttribute("readonly", "readonly");
+                task_edit_el.innerText = "Edit";
+            }
+        })
+
+        task_delete_el.addEventListener('click', ()=>{
+            list_el.removeChild(task_el);
+        })
+    });
+});
+    </script> -->
+
+</body>
+</html>

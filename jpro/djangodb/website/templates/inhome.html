@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-home</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+    }
+    body{
+        background: #002D62;
+        background-size: cover;
+        font-family: 'Trebuchet MS', sans-serif;
+    }
+
+    h1{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        color: #fff;
+        text-align: center;
+    }
+
+    h4{
+        text-align: right;
+    }
+
+    .container{
+        display: inline-table;
+    }
+
+    .typed-out h4{
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    animation: typing 1s forwards;
+    font-size: 1.6rem;
+    font-weight: 400;
+    width: 0;
+    }
+
+    @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+    }
+
+    .center{
+        position: absolute;
+        margin: auto;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 250px;
+        height: 250px;
+        background-color: #f54242;
+        box-shadow: 0px 0px 50px 3px #000;
+    }
+    
+    span{
+        left: 10%;
+        top: 10%;
+        box-shadow: 0px 0px 25px #000;
+    }
+
+    span:nth-child(1){
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        background-color: #f99090;
+        left: 6%;
+        top: 6%;
+        animation: ani 3s infinite;
+        animation-delay: 0.3s;
+    }
+
+    span:nth-child(2){
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: #fbbbbb;
+        left: 10%;
+        top: 10%;
+        animation: ani 3s infinite;
+        animation-delay: 0.4s;
+    }
+
+    span:nth-child(3){
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background-color: #fde3e3;
+        left: 14%;
+        top: 14%;
+        animation: ani 3s infinite;
+        animation-delay: 0.5s;
+    }
+
+    span:nth-child(4){
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        background-color: #f99090;
+        left: 18%;
+        top: 18%;
+        animation: ani 3s infinite;
+        animation-delay: 0.6s;
+    }
+
+    span:nth-child(5){
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        background-color: #fde3e3;
+        left: 22%;
+        top: 22%;
+        animation: ani 3s infinite;
+        animation-delay: 0.7s;
+    }
+
+    span:nth-child(6){
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        background-color: #f99090;
+        left: 26%;
+        top: 26%;
+        animation: ani 3s infinite;
+        animation-delay: 0.8s;
+    }
+
+    span:nth-child(7){
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: #fbbbbb;
+        left: 30%;
+        top: 30%;
+        animation: ani 3s infinite;
+        animation-delay: 1s;
+    }
+
+    @keyframes ani {
+        0%{
+            transition: 0.7s;
+            transform: rotate(0deg);
+        }
+        20%{
+            transition: 0.7s;
+            transform: rotate(95deg);
+        }
+        50%{
+            transition: 0.7s;
+            transform: rotate(360deg);
+        }
+        100%{
+            transition: 0.7s;
+            transform: rotate(0deg);
+        }
+    }
+    </style>
+</head>
+<body>
+    {% include 'sidebar.html'%}
+    <br><br><br><br>
+    <!-- <h1>Project Leader</h1> -->
+    <div class="container" style="text-align: center;">
+    <div class="typed-out" style="color: #fff;"><h4> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Welcome to our Web page</h4></div></div>
+    <div class="center">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+</html>
